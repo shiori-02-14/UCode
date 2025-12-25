@@ -6,7 +6,7 @@
     <title>UECode</title>
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
     <style>
-        :root { --uec-blue: #4285F4; }
+        :root { --uec-blue: #477cd2; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
@@ -97,12 +97,37 @@
         #barcode-container { 
             margin-top: 40px; 
             background: white; 
-            padding: 20px; 
+            padding: 40px 20px; 
             border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+            min-width: 300px;
+            overflow: visible;
+            width: 100%;
         }
         svg { 
-            max-width: 100%; 
-            height: auto; 
+            max-width: none;
+            max-height: 400px;
+            width: auto;
+            height: auto;
+            display: block;
+            transform: rotate(90deg);
+            transform-origin: center center;
+        }
+        @media print {
+            svg {
+                transform: rotate(90deg) !important;
+                transform-origin: center center !important;
+                page-break-inside: avoid;
+            }
+            #barcode-container {
+                page-break-inside: avoid;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
         }
         .info { 
             color: #888; 
@@ -115,7 +140,7 @@
 <body>
 
 <div class="container">
-    <h1>UECode</h1>
+    <h1>UCode</h1>
     <hr class="separator">
     <h2>図書館用バーコード</h2>
     
@@ -138,11 +163,6 @@
 
     <div id="barcode-container">
         <svg id="barcode"></svg>
-    </div>
-    
-    <div class="info">
-        規格: NW-7 (Codabar)<br>
-        構成: A + 学籍番号 + 再発行回数 + A
     </div>
 </div>
 
@@ -185,12 +205,20 @@
         JsBarcode("#barcode", barcodeData, {
             format: "codabar",
             lineColor: "#000",
-            width: 1.6,    // 横幅を少し抑えてスマートに
-            height: 90,    // 高さを調整
+            width: 1.5,      // バーコードの線の太さ
+            height: 50,   // バーコードの高さ（回転後は幅になる）
             displayValue: true,
             fontSize: 18,
-            background: "#ffffff"
+            background: "#ffffff",
+            margin: 0
         });
+        
+        // バーコードを確実に回転させる
+        const svg = document.getElementById("barcode");
+        if (svg) {
+            svg.style.transform = "rotate(90deg)";
+            svg.style.transformOrigin = "center center";
+        }
     }
 </script>
 
