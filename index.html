@@ -113,12 +113,12 @@
             width: auto;
             height: auto;
             display: block;
-            transform: rotate(180deg) scale(1.5);
+            transform: rotate(180deg) scale(1.3);
             transform-origin: center center;
         }
         @media print {
             svg {
-                transform: rotate(180deg) scale(1.5) !important;
+                transform: rotate(180deg) scale(1.3) !important;
                 transform-origin: center center !important;
                 page-break-inside: avoid;
             }
@@ -159,7 +159,7 @@
         <option value="9">再発行回数: 9</option>
     </select>
     <br>
-    <button onclick="generateAndSave()">バーコードを生成</button>
+    <button onclick="generateAndSave()">バーコードを生成・保存</button>
 
     <div id="barcode-container">
         <svg id="barcode"></svg>
@@ -215,7 +215,7 @@
         // バーコードを確実に回転・拡大させる
         const svg = document.getElementById("barcode");
         if (svg) {
-            svg.style.transform = "rotate(270deg) scale(1.5)";
+            svg.style.transform = "rotate(270deg) scale(1.3)";
             svg.style.transformOrigin = "center center";
         }
     }
