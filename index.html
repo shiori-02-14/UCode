@@ -113,12 +113,12 @@
             width: auto;
             height: auto;
             display: block;
-            transform: rotate(90deg);
+            transform: rotate(180deg) scale(1.2);
             transform-origin: center center;
         }
         @media print {
             svg {
-                transform: rotate(90deg) !important;
+                transform: rotate(180deg) scale(1.2) !important;
                 transform-origin: center center !important;
                 page-break-inside: avoid;
             }
@@ -212,10 +212,10 @@
             margin: 0
         });
         
-        // バーコードを確実に回転させる
+        // バーコードを確実に回転・拡大させる
         const svg = document.getElementById("barcode");
         if (svg) {
-            svg.style.transform = "rotate(90deg)";
+            svg.style.transform = "rotate(180deg) scale(1.2)";
             svg.style.transformOrigin = "center center";
         }
     }
